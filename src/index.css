@@ -1,0 +1,490 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight text-gray-900 dark:text-gray-100;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+
+  a {
+    @apply text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors;
+  }
+  
+  /* Focus styles for accessibility */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2 dark:ring-offset-gray-900;
+  }
+  
+  /* Enhanced tap targets for mobile */
+  @media (max-width: 767px) {
+    button, 
+    input[type="button"], 
+    input[type="submit"],
+    input[type="reset"],
+    a, 
+    select,
+    .tap-target {
+      @apply min-h-[44px] min-w-[44px];
+      touch-action: manipulation;
+    }
+    
+    /* Adjust select element height */
+    select {
+      @apply h-[44px];
+    }
+    
+    /* Ensure labels are large enough */
+    label {
+      @apply min-h-[24px];
+    }
+    
+    /* Prevent zooming on iOS when focusing inputs */
+    input, select, textarea {
+      @apply text-base;
+    }
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply bg-blue-600 dark:bg-blue-700 text-white hover:bg-blue-700 dark:hover:bg-blue-600 focus-visible:ring-blue-600 dark:focus-visible:ring-blue-500 shadow-sm hover:shadow;
+  }
+
+  .btn-secondary {
+    @apply bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 focus-visible:ring-gray-500 shadow-sm hover:shadow;
+  }
+  
+  .btn-success {
+    @apply bg-green-600 dark:bg-green-700 text-white hover:bg-green-700 dark:hover:bg-green-600 focus-visible:ring-green-600 dark:focus-visible:ring-green-500 shadow-sm hover:shadow;
+  }
+  
+  .btn-error {
+    @apply bg-red-600 dark:bg-red-700 text-white hover:bg-red-700 dark:hover:bg-red-600 focus-visible:ring-red-600 dark:focus-visible:ring-red-500 shadow-sm hover:shadow;
+  }
+
+  .input {
+    @apply block w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none focus:ring-blue-500 dark:focus:ring-blue-400 sm:text-sm transition-colors;
+  }
+
+  .select {
+    @apply block w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2 text-gray-900 dark:text-gray-100 focus:border-blue-500 dark:focus:border-blue-400 focus:outline-none focus:ring-blue-500 dark:focus:ring-blue-400 sm:text-sm appearance-none bg-no-repeat bg-right pr-8;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-size: 1.5em 1.5em;
+  }
+
+  .wizard-step {
+    @apply w-full mx-auto;
+  }
+
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700;
+  }
+  
+  .dashboard-card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-all hover:shadow-md;
+  }
+  
+  .dashboard-section {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden;
+  }
+  
+  .dashboard-section-header {
+    @apply bg-gray-50 dark:bg-gray-900/50 p-4 border-b border-gray-200 dark:border-gray-700;
+  }
+  
+  .dashboard-section-body {
+    @apply p-5;
+  }
+  
+  /* High-contrast mode styling */
+  .high-contrast {
+    @apply contrast-125 brightness-100;
+  }
+  
+  .high-contrast .btn-primary {
+    @apply bg-blue-800 dark:bg-blue-500 text-white border-2 border-white dark:border-gray-900;
+  }
+  
+  .high-contrast .text-gray-600 {
+    @apply text-gray-900 dark:text-gray-50;
+  }
+  
+  .high-contrast a {
+    @apply underline text-blue-800 dark:text-blue-400;
+  }
+
+  /* Mobile-specific components */
+  @media (max-width: 767px) {
+    .mobile-card {
+      @apply shadow-sm rounded-lg p-4 border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-800;
+    }
+    
+    .mobile-btn {
+      @apply py-3 w-full flex justify-center items-center;
+    }
+    
+    .mobile-stepper {
+      @apply fixed bottom-16 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 p-2 z-20;
+    }
+    
+    /* Improve touch areas for mobile */
+    .tap-target-lg {
+      @apply min-h-[48px] min-w-[48px] flex items-center justify-center;
+    }
+    
+    /* Enhanced form inputs for mobile */
+    .mobile-input {
+      @apply h-12 text-base;
+    }
+  }
+
+  /* Interactive element states */
+  .hover-lift {
+    @apply transition-transform duration-200 hover:-translate-y-1;
+  }
+  
+  .interactive-card {
+    @apply transition-all duration-200 hover:shadow-md hover:-translate-y-0.5;
+  }
+  
+  .fade-border {
+    @apply transition-colors duration-200 border-transparent hover:border-primary-200 dark:hover:border-primary-800;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg);
+  }
+}
+
+/* Animation Classes */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.5s ease-out forwards;
+}
+
+.animate-fadeDown {
+  animation: fadeDown 0.3s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-out forwards;
+}
+
+.animate-bounce-subtle {
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+/* Screen reader only class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Mobile swipe indicator */
+.swipe-indicator {
+  animation: swipeIndicator 2s ease-in-out infinite;
+}
+
+@keyframes swipeIndicator {
+  0%, 100% {
+    transform: translateX(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateX(10px);
+    opacity: 1;
+  }
+}
+
+/* Print styles */
+@media print {
+  header, footer, .btn, .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .print-container {
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    border: none;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .mobile-stack {
+    flex-direction: column;
+  }
+  
+  .mobile-full-width {
+    width: 100%;
+  }
+  
+  .mobile-touch-scroll {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+  }
+  
+  .mobile-touch-scroll > * {
+    scroll-snap-align: start;
+  }
+  
+  /* Improve mobile button tap targets */
+  button, .btn {
+    min-height: 44px;
+  }
+  
+  /* Prevent 300ms tap delay */
+  a, button, input, select, textarea {
+    touch-action: manipulation;
+  }
+}
+
+/* New size classes for text */
+.text-xxs {
+  font-size: 0.625rem;
+  line-height: 0.875rem;
+}
+
+/* Mobile-specific overrides */
+@media (max-width: 767px) {
+  input[type="radio"],
+  input[type="checkbox"] {
+    @apply h-5 w-5; /* Larger checkboxes and radio buttons */
+  }
+  
+  /* Larger touch targets in general */
+  .wizard-step button:not(.btn) {
+    @apply p-2;
+  }
+  
+  /* Fix iOS input zoom */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  select,
+  textarea {
+    @apply text-base;
+    font-size: 16px !important;
+  }
+  
+  /* Enhanced bottom spacing to prevent content from being hidden behind mobile navigation */
+  .wizard-step {
+    @apply pb-16;
+  }
+}
+
+/* Additional mobile-friendly utilities */
+.mobile-safe-area-bottom {
+  padding-bottom: constant(safe-area-inset-bottom); /* iOS 11.0 */
+  padding-bottom: env(safe-area-inset-bottom); /* iOS 11.2+ */
+}
+
+.mobile-safe-area-top {
+  padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
+  padding-top: env(safe-area-inset-top); /* iOS 11.2+ */
+}
+
+/* Background pattern */
+.bg-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+}
