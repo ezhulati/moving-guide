@@ -715,22 +715,10 @@ const HomeProfileStep = () => {
             </div>
             
             {/* Navigation buttons */}
-            <div className="mt-8 flex justify-between">
-              <button
-                type="button"
-                onClick={handlePreviousQuestion}
-                className="btn btn-secondary"
-              >
-                Back
-              </button>
-              <button
-                type="button"
-                onClick={() => {}} // This will be handled by the wizard navigation
-                className="btn btn-primary flex items-center"
-              >
-                Continue to Plan Options
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
+            <div className="mt-8 flex justify-center">
+              <p className="text-gray-600 dark:text-gray-300 text-center">
+                Perfect! Click "Continue to Plan Options" below to see plans that match your profile.
+              </p>
             </div>
           </div>
         )}
